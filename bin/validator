@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+
+<?php
+
+$autoloadPath1 = __DIR__ . '/../../../autoload.php';
+$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($autoloadPath1)) {
+    require_once $autoloadPath1;
+} else {
+    require_once $autoloadPath2;
+}
+
+$v = new \Hexlet\Code\Validator();
+
+$v->string();
+
+$schema = $v->string();
+
+$schema2 = $v->string();
+
+$schema->required();
+
+var_dump($schema->contains('qwe')->isValid(null));
+//var_dump($schema2->isValid(''));
