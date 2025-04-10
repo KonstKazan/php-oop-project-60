@@ -39,7 +39,6 @@ class StringValidate extends Validator
 
     public function required(): static
     {
-//        $this->required = true;
         $this->rules[] = 'required';
         return $this;
     }

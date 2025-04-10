@@ -14,6 +14,6 @@ if (file_exists($autoloadPath1)) {
 
 $v = new Validator();
 
-$schema = $v->string();
+$schema = $v->number();
 
-var_dump($schema->required()->contains('qwe')->minLength(3)->isValid('qwerty'));
+var_dump($schema->required()->positive()->range(1, 4)->isValid(4));
