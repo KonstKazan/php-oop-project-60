@@ -6,8 +6,12 @@ class StringValidate extends Validator
 {
     private bool|int $minLength = false;
     public string $contains = '';
-//    private bool $required = false;
     private array $result = [
+        'required' => true,
+        'contains' => true,
+        'minLength' => true,
+    ];
+    private array $resultDefault = [
         'required' => true,
         'contains' => true,
         'minLength' => true,
@@ -34,7 +38,9 @@ class StringValidate extends Validator
                     break;
             }
         }
-        return !in_array(false, $this->result, true);
+        $result = !in_array(false, $this->result, true);
+        $this->result = array_merge($this->result, $this->resultDefault);
+        return $result;
     }
 
     public function required(): static

@@ -9,6 +9,11 @@ class NumberValidate extends Validator
         'positive' => true,
         'range' => true,
     ];
+    private array $resultDefault = [
+        'required' => true,
+        'positive' => true,
+        'range' => true,
+    ];
     private array $range = ['minNum' => 0, 'maxNum' => 0];
     private array $rules = [];
 
@@ -34,7 +39,9 @@ class NumberValidate extends Validator
                     break;
             }
         }
-        return !in_array(false, $this->result, true);
+        $result = !in_array(false, $this->result, true);
+        $this->result = array_merge($this->result, $this->resultDefault);
+        return $result;
     }
 
     public function required(): static
