@@ -16,14 +16,13 @@ $v = new Validator();
 
 $schema = $v->array();
 
-var_dump($schema->isValid(null)); // true
+// Позволяет описывать валидацию для ключей массива
+$schema->shape([
+    'name' => $v->string()->required(),
+    'age' => $v->number()->positive(),
+]);
 
-$schema = $schema->required();
-
-var_dump($schema->isValid([])); // true
-var_dump($schema->isValid(['hexlet'])); // true
-
-$schema->sizeof(2);
-
-var_dump($schema->isValid(['hexlet'])); // false
-var_dump($schema->isValid(['hexlet', 'code-basics'])); // true
+var_dump($schema->isValid(['name' => 'kolya', 'age' => 100])); // true
+var_dump($schema->isValid(['name' => 'maya', 'age' => null])); // true
+var_dump($schema->isValid(['name' => '', 'age' => null])); // false
+var_dump($schema->isValid(['name' => 'ada', 'age' => -5])); // false

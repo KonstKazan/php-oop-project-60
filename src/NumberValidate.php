@@ -2,7 +2,7 @@
 
 namespace Hexlet\Code;
 
-class NumberValidate extends Validator
+class NumberValidate
 {
     private array $result = [
         'required' => true,

@@ -2,18 +2,21 @@
 
 namespace Hexlet\Code;
 
-class ArrayValidate extends Validator
+class ArrayValidate
 {
     private array $result = [
         'required' => true,
         'sizeof' => true,
+        'shape' => true,
     ];
     private array $resultDefault = [
         'required' => true,
         'sizeof' => true,
+        'shape' => true,
     ];
     private array $rules = [];
     private bool|int $size = false;
+    private array $shape = [];
 
     public function isValid(array|null $value): bool
     {
@@ -29,6 +32,12 @@ class ArrayValidate extends Validator
                         $this->result['sizeof'] = false;
                     }
                     break;
+                case 'shape':
+                    $innerResult = [];
+                    foreach ($this->shape as $key => $innerRule) {
+                        $innerResult[] = $innerRule->isValid($value[$key]);
+                    }
+                    $this->result['shape'] = !in_array(false, $innerResult, true);
             }
         }
 //        var_dump($this->size);
@@ -47,6 +56,13 @@ class ArrayValidate extends Validator
     {
         $this->size = $size;
         $this->rules[] = 'sizeof';
+        return $this;
+    }
+
+    public function shape(array $shape): static
+    {
+        $this->rules[] = 'shape';
+        $this->shape = $shape;
         return $this;
     }
 }

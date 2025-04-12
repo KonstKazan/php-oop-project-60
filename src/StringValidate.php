@@ -2,7 +2,7 @@
 
 namespace Hexlet\Code;
 
-class StringValidate extends Validator
+class StringValidate
 {
     private bool|int $minLength = false;
     public string $contains = '';
