@@ -23,7 +23,7 @@ class NumberValidate extends Validator
         foreach ($this->rules as $rule) {
             switch ($rule) {
                 case 'required':
-                    if ($value === null || $value === 0) {
+                    if ($value === null) {
                         $this->result['required'] = false;
                     }
                     break;
