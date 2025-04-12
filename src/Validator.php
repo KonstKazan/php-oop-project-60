@@ -4,7 +4,6 @@ namespace Hexlet\Validator;
 
 class Validator
 {
-//    public array $customValidator = [];
     protected static array $customValidator;
 
     public function string(): StringValidate
