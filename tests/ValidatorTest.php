@@ -3,6 +3,7 @@
 namespace Hexlet\Validator\Tests;
 
 use Hexlet\Validator\Validator;
+use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
 class ValidatorTest extends TestCase
@@ -11,9 +12,9 @@ class ValidatorTest extends TestCase
     {
         $v = new Validator();
         $schema = $v->string();
-        $this->assertTrue($schema->isValid(null));
+        Assert::assertTrue($schema->isValid(null));
 
         $schema->required();
-        $this->assertFalse($schema->isValid(null));
+        Assert::assertFalse($schema->isValid(null));
     }
 }

@@ -21,7 +21,7 @@ class Validator
         return new ArrayValidate();
     }
 
-    public function addValidator($type, $name, $fn): void
+    public function addValidator(string $type, string $name, callable $fn): void
     {
         static::$customValidator = ['name' => $name, 'type' => $type, 'value' => null, 'fn' => $fn];
     }
