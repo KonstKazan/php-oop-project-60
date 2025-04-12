@@ -20,9 +20,6 @@ class NumberValidate extends Validator
 
     public function isValid(int|null $value): bool
     {
-        if ($value === 0) {
-            return false;
-        }
         foreach ($this->rules as $rule) {
             switch ($rule) {
                 case 'required':
