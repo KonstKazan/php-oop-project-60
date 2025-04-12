@@ -18,7 +18,7 @@ class NumberValidate extends Validator
     private array $rules = [];
 
 
-    public function isValid(string|null $value): bool
+    public function isValid(int|null $value): bool
     {
         if ($value === 0) {
             return false;
