@@ -18,7 +18,7 @@ class ArrayValidate
     private bool|int $size = false;
     private array $shape = [];
 
-    public function isValid(array|null $value): bool
+    public function isValid(mixed $value): bool
     {
         foreach ($this->rules as $rule) {
             switch ($rule) {
