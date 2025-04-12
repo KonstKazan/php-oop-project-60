@@ -23,6 +23,6 @@ class Validator
 
     public function addValidator($type, $name, $fn): void
     {
-        static::$customValidator= ['name' => $name, 'type' => $type, 'value' => null, 'fn' => $fn];
+        static::$customValidator = ['name' => $name, 'type' => $type, 'value' => null, 'fn' => $fn];
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Hexlet\Validator;
 
-
 class StringValidate extends Validator
 {
     private bool|int $minLength = false;
