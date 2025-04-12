@@ -28,7 +28,7 @@ class NumberValidate extends Validator
                     }
                     break;
                 case 'positive':
-                    if ($value < 0) {
+                    if ($value <= 0) {
                         $this->result['positive'] = false;
                     }
                     break;
