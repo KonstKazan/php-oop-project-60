@@ -1,6 +1,6 @@
 <?php
 
-namespace Hexlet\Code;
+namespace Hexlet\Validator;
 
 use function _PHPStan_f2f2ddf44\React\Async\parallel;
 

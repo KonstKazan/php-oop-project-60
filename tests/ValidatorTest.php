@@ -1,6 +1,6 @@
 <?php
 
-use Hexlet\Code\Validator;
+use Hexlet\Validator\Validator;
 use PHPUnit\Framework\TestCase;
 
 class ValidatorTest extends TestCase
