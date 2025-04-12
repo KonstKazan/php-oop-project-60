@@ -14,15 +14,20 @@ if (file_exists($autoloadPath1)) {
 
 $v = new Validator();
 
-$schema = $v->array();
+$fn = fn($value, $start) => str_starts_with($value, $start);
+// Метод добавления новых валидаторов
+// addValidator($type, $name, $fn)
+$v->addValidator('string', 'startWith', $fn);
 
-// Позволяет описывать валидацию для ключей массива
-$schema->shape([
-    'name' => $v->string()->required(),
-    'age' => $v->number()->positive(),
-]);
+//var_dump($v->customValidator);
+// Новые валидаторы вызываются через метод test
+$schema = $v->string()->test('startWith', 'H');
+//var_dump($v->customValidator);
+var_dump($schema->isValid('exlet')); // false
+var_dump($schema->isValid('Hexlet')); // true
 
-var_dump($schema->isValid(['name' => 'kolya', 'age' => 100])); // true
-var_dump($schema->isValid(['name' => 'maya', 'age' => null])); // true
-var_dump($schema->isValid(['name' => '', 'age' => null])); // false
-var_dump($schema->isValid(['name' => 'ada', 'age' => -5])); // false
+$fn = fn($value, $min) => $value >= $min;
+$v->addValidator('number', 'min', $fn);
+
+$schema = $v->number()->test('min', 5);
+var_dump($schema->isValid(4)); // false

@@ -2,7 +2,7 @@
 
 namespace Hexlet\Code;
 
-class NumberValidate
+class NumberValidate extends Validator
 {
     private array $result = [
         'required' => true,
@@ -37,6 +37,9 @@ class NumberValidate
                         $this->result['range'] = false;
                     }
                     break;
+                case 'custom':
+                    $fn = parent::$customValidator['fn'];
+                    $this->result['custom'] = $fn($value, parent::$customValidator['value']);
             }
         }
         $result = !in_array(false, $this->result, true);
@@ -61,6 +64,13 @@ class NumberValidate
         $this->range['minNum'] = $minNum;
         $this->range['maxNum'] = $maxNum;
         $this->rules[] = 'range';
+        return $this;
+    }
+
+    public function test(string $name, int $value): static
+    {
+        parent::$customValidator['value'] = $value;
+        $this->rules[] = 'custom';
         return $this;
     }
 }

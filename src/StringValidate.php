@@ -2,7 +2,9 @@
 
 namespace Hexlet\Code;
 
-class StringValidate
+use function _PHPStan_f2f2ddf44\React\Async\parallel;
+
+class StringValidate extends Validator
 {
     private bool|int $minLength = false;
     public string $contains = '';
@@ -10,11 +12,13 @@ class StringValidate
         'required' => true,
         'contains' => true,
         'minLength' => true,
+        'custom' => true,
     ];
     private array $resultDefault = [
         'required' => true,
         'contains' => true,
         'minLength' => true,
+        'custom' => true,
     ];
     private array $rules = [];
     public function isValid(string|null $value): bool
@@ -36,6 +40,9 @@ class StringValidate
                         $this->result['minLength'] = false;
                     }
                     break;
+                case 'custom':
+                    $fn = parent::$customValidator['fn'];
+                    $this->result['custom'] = $fn($value, parent::$customValidator['value']);
             }
         }
         $result = !in_array(false, $this->result, true);
@@ -60,6 +67,13 @@ class StringValidate
     {
         $this->minLength = $length;
         $this->rules[] = 'minLength';
+        return $this;
+    }
+
+    public function test(string $name, string $value): static
+    {
+        parent::$customValidator['value'] = $value;
+        $this->rules[] = 'custom';
         return $this;
     }
 }
